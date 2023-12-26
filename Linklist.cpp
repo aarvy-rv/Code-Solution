@@ -10,6 +10,14 @@ class Node{
             this->val = val;
             this->next = NULL;
         }
+        ~Node(){
+            int value = this->val;
+            if(this->next != NULL){
+                this->next =NULL;
+                 delete next;
+            }
+            cout<<"Deleting node with the value " << value <<"\n";
+        }
 };
 
 void insertAtHead(Node* &head,int val){
@@ -18,7 +26,7 @@ void insertAtHead(Node* &head,int val){
     head = newNode;
     
 }
-void print(Node* head){
+void print(Node* &head){
     Node* temp = head;
     while(temp != NULL){
         cout<<temp->val<<" ";
@@ -26,7 +34,7 @@ void print(Node* head){
     }
     cout<<"\n";
 }
-void insertAtTail(Node* tail,int val){
+void insertAtTail(Node* &tail,int val){
 
     Node* newNode = new Node(val);
     tail-> next = newNode;
@@ -34,7 +42,7 @@ void insertAtTail(Node* tail,int val){
 
 }
 
-void insertAtKthIndex(Node* head,Node* tail,int k,int val){
+void insertAtKthIndex(Node* &head,Node* &tail,int k,int val){
 
     if(k == 0){
         insertAtHead(head,val);
@@ -54,6 +62,36 @@ void insertAtKthIndex(Node* head,Node* tail,int k,int val){
     newNode -> next = temp->next;
     temp->next = newNode;
 }
+
+void deleteNode(Node* &head,Node* &tail,int position){
+    if(position == 0){
+        Node * temp = head;
+        head = temp->next;
+        temp->next =NULL;
+        delete(temp);
+    }
+    else{
+        Node* curr = head;
+        Node* prev = NULL;
+        int i=0;
+        while( i < position){
+            prev = curr;
+            curr = curr->next;
+            i++;
+        }
+        if(curr->next == NULL)
+            tail = prev;
+        prev->next = curr->next;
+      //  curr->next = NULL;
+        delete(curr);
+    }
+}
+
+void printHeadTailValue(Node* &head,Node* &tail){
+    cout << "Value at head: "<<head->val<<"\n";
+    cout<< "Value at tail: "<< tail->val<<"\n";
+}
+
 
 int main(){
 
@@ -76,5 +114,25 @@ int main(){
 
     insertAtKthIndex(head,tail,4,0);
     print(head);
+
+    insertAtKthIndex(head,tail,6,90);
+    print(head);
+    printHeadTailValue(head,tail);
+
+    deleteNode(head,tail,1);
+    print(head);
+
+    deleteNode(head,tail,5);
+    print(head);
+    printHeadTailValue(head,tail);
+    
+    deleteNode(head,tail,2);
+    print(head);
+
+    deleteNode(head,tail,0);
+    print(head);
+    printHeadTailValue(head,tail);
+
+   
 
 }
