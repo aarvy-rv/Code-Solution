@@ -22,18 +22,32 @@ class Node{
     }
 };
 
-void insertAtHead(Node* &head,int val){
+void insertAtHead(Node* &head,Node* &tail,int val){
 
     Node* node = new Node(val);
-    node->next = head;
-    head->prev = node;
-    head = node;
+
+    if(head == NULL){
+        head = node;
+        tail = node;
+    }
+    else
+    {
+        node->next = head;
+        head->prev = node;
+        head = node;
+    }
 }
-void insertAtTail(Node* &tail,int val){
+void insertAtTail(Node* &head,Node* &tail,int val){
     Node* node = new Node(val);
+        if(tail == NULL){
+        head = node;
+        tail = node;
+    }
+    else{
     tail->next = node;
     node->prev = tail;
     tail = node;
+    }
 }
 void insertAtKthPosition(Node* &head,Node* &tail,int k,int val){
 
@@ -41,7 +55,7 @@ void insertAtKthPosition(Node* &head,Node* &tail,int k,int val){
     Node* node = new Node (val);
 
     if(k == 0){
-        insertAtHead(head,val);
+        insertAtHead(head,tail,val);
         return;
     }
     
@@ -52,13 +66,13 @@ void insertAtKthPosition(Node* &head,Node* &tail,int k,int val){
     }
     if(temp->next == NULL)
     {
-        insertAtTail(tail,val);
+        insertAtTail(head,tail,val);
         return;
     }
     node->next = temp->next;
     temp->next->prev = node;
     temp->next = node;
-}
+    node->prev =temp;}
 
 void deleteAtHead(Node* &head){
 
@@ -134,32 +148,32 @@ void printHeadTailValue(Node* &head,Node* &tail){
 
 int main(){
     Node* node1 = new Node(40);
-    Node* head = node1;
-    Node* tail = node1;
+    Node* head = NULL;//node1;
+    Node* tail = NULL;//node1;
 
-    insertAtHead(head,30);
+    insertAtHead(head,tail,30);
     printFromHead(head);
     printFromTail(tail);
 
-    insertAtHead(head,20);
+    insertAtHead(head,tail,20);
     printFromHead(head);
     printFromTail(tail);
 
-    insertAtHead(head,10);
+    insertAtHead(head,tail,10);
     printFromHead(head);
     printFromTail(tail);
 
-    insertAtTail(tail,50);
-    printFromHead(head);
-    printFromTail(tail);
-
-    
-    insertAtTail(tail,60);
+    insertAtTail(head,tail,50);
     printFromHead(head);
     printFromTail(tail);
 
     
-    insertAtTail(tail,70);
+    insertAtTail(head,tail,60);
+    printFromHead(head);
+    printFromTail(tail);
+
+    
+    insertAtTail(head,tail,70);
     printFromHead(head);
     printFromTail(tail);
 
@@ -172,7 +186,7 @@ int main(){
     printFromTail(tail);
     printHeadTailValue(head,tail);
 
-    insertAtKthPosition(head,tail,9,80);
+    insertAtKthPosition(head,tail,8,80);
     printFromHead(head);
     printFromTail(tail);
     printHeadTailValue(head,tail);
@@ -198,7 +212,7 @@ int main(){
     printFromHead(head);
     printFromTail(tail);
 
-    deleteNode(head,tail,5);
+    deleteNode(head,tail,4);
     printFromHead(head);
     printFromTail(tail); 
 
