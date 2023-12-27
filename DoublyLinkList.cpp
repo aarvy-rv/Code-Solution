@@ -163,17 +163,31 @@ int main(){
     printFromHead(head);
     printFromTail(tail);
 
+    insertAtKthPosition(head,tail,1,15);
+    printFromHead(head);
+    printFromTail(tail);
+
+    insertAtKthPosition(head,tail,0,5);
+    printFromHead(head);
+    printFromTail(tail);
+    printHeadTailValue(head,tail);
+
+    insertAtKthPosition(head,tail,9,80);
+    printFromHead(head);
+    printFromTail(tail);
+    printHeadTailValue(head,tail);
+
     
     deleteAtHead(head);
     printFromHead(head);
     printFromTail(tail);
-
     printHeadTailValue(head,tail);
 
     
     deleteAtTail(tail);
     printFromHead(head);
     printFromTail(tail); 
+    printHeadTailValue(head,tail);
 
     
    deleteNode(head,tail,0);
@@ -184,7 +198,7 @@ int main(){
     printFromHead(head);
     printFromTail(tail);
 
-    deleteNode(head,tail,1);
+    deleteNode(head,tail,5);
     printFromHead(head);
     printFromTail(tail); 
 
