@@ -18,17 +18,14 @@ class Solution {
     int numProvinces(vector<vector<int>> adj, int V) {
          vector<int> vis(V,0);
          
-         
-         int l = adj.size();
          vector<int> adjList[V];
-         for(int i = 0; i< l;i++){ // converting adjacency matrix to adjacency list 
-             for(int j = 0; j< l;j++){
-                 if(adj[i][j] == 1){
-                     adjList[i].push_back(j);
-                     adjList[j].push_back(i);
-                 }
-                
-             }
+         for(int i = 0; i< V;i++)  // converting adjacency matrix to adjacency list
+         { 
+             for(int j = 0; j < V; j++)
+             {
+                if(adj[i][j] == 1)
+                    adjList[i].push_back(j);
+            }
          }
             
             int provinceCount = 0;
